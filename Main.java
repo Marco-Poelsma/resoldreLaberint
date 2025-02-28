@@ -21,4 +21,8 @@ public class Main {
         Thread.currentThread().interrupt();
         }
     }
+
+    private static boolean esValid(int x, int y, char[][] laberint) {
+        return x >= 0 && y >= 0 && x < laberint.length && y < laberint[0].length && laberint[x][y] == ' ' && laberint[x][y] != '#';
+    }
 }
