@@ -1,6 +1,7 @@
 public class Main {
+    public static int movesAvailable=1;
     public static void main(String[] args) {
-        char[][] laberint = generadorLaberints(5, 5);
+        char[][] laberint = generadorLaberints(10, 30);
         imprimirLaberint(laberint);
         if (resolLaberint(0, 0, laberint)) {
             System.out.println("Camí trobat!");
@@ -50,7 +51,14 @@ public class Main {
                 return true;
             }
             if (resolLaberint(x + 1, y, laberint) || resolLaberint(x, y + 1, laberint) || resolLaberint(x - 1, y, laberint) || resolLaberint(x, y - 1, laberint) || resolLaberint(x + 1, y + 1, laberint) || resolLaberint(x - 1, y - 1, laberint) || resolLaberint(x + 1, y - 1, laberint) || resolLaberint(x - 1, y + 1, laberint)) {
+                movesAvailable--;
+                if(movesAvailable==0){
+                    return false;
+                }
                 return true;
+
+            }else{
+                laberint[x][y] = '·';
             }
             
             laberint[x][y] = ' ';
@@ -65,6 +73,7 @@ public class Main {
                 if (Math.random() < 0.3) {
                     laberint[i][j] = '#';
                 } else {
+                    movesAvailable++;
                     laberint[i][j] = ' ';
                 }
             }
