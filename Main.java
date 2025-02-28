@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        
+        char[][] laberint = {{' ', '#', ' ', ' ', ' '}, {' ', '#', ' ', ' ', ' '}, {' ', ' ', ' ', '#', ' '}, {'#', '#', '#', '#', '#'}, {'X', ' ', ' ', ' ', ' '}};
     }
     private static void imprimirLaberint(char[][] laberint) { // Mostra el laberint actual a la consola
         System.out.print("\033[H\033[2J"); // Esborra la pantalla per animació suau
