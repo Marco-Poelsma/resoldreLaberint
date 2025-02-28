@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        char[][] laberint = {{' ', '#', ' ', ' ', ' '}, {' ', '#', ' ', '#', ' '}, {' ', ' ', ' ', '#', ' '}, {'#', '#', '#', '#', ' '}, {'X', ' ', ' ', ' ', ' '}};
+        char[][] laberint = generadorLaberints(5, 5);
         imprimirLaberint(laberint);
         if (resolLaberint(0, 0, laberint)) {
             System.out.println("Camí trobat!");
@@ -60,9 +60,37 @@ public class Main {
             if (resolLaberint(x, y - 1, laberint)) {
                 return true;
             }
+            if (resolLaberint(x+1, y+1, laberint)) {
+                return true;
+            }
+            if (resolLaberint(x-1, y-1, laberint)) {
+                return true;
+            }
+            if (resolLaberint(x+1, y-1, laberint)) {
+                return true;
+            }
+            if (resolLaberint(x-1, y+1, laberint)) {
+                return true;
+            }
             laberint[x][y] = ' ';
             imprimirLaberint(laberint);
         }
         return false;
+    }
+
+    public static char[][] generadorLaberints(int files, int columnes) {
+        char[][] laberint = new char[files][columnes];
+        for (int i = 0; i < files; i++) {
+            for (int j = 0; j < columnes; j++) {
+                if (Math.random() < 0.3) {
+                    laberint[i][j] = '#';
+                } else {
+                    laberint[i][j] = ' ';
+                }
+            }
+        }
+        laberint[files - 1][columnes - 1] = 'X';
+        laberint[0][0] = ' ';
+        return laberint;
     }
 }
