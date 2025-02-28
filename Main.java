@@ -44,7 +44,7 @@ public class Main {
                 return true;
             }
             laberint[x][y] = 'O';
-            esperar(150);
+            esperar(50);
             imprimirLaberint(laberint);
             if (laberint[x][y] == 'X') {
                 return true;
