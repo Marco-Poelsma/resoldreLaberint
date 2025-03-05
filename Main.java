@@ -1,8 +1,18 @@
+import java.util.ArrayList;
+import java.util.Random;
 public class Main {
     public static void main(String[] args) {
-        char[][] laberint = generadorLaberints(5, 5);
+        char[][] laberint = generadorLaberints(10, 10);
+        ArrayList<String> visitats = new ArrayList<>();
+        int[] iniciFinal = iniciFinalRandom(laberint);
+        int iniciX = iniciFinal[0];
+        int iniciY = iniciFinal[1];
+        int finalX = iniciFinal[2];
+        int finalY = iniciFinal[3];
+        laberint[finalX][finalY] = 'X';
+        laberint[iniciX][iniciY] = 'I';
         imprimirLaberint(laberint);
-        if (resolLaberint(0, 0, laberint)) {
+        if (resolLaberint(iniciX, iniciY, laberint, visitats)) {
             System.out.println("Camí trobat!");
         } else {
             System.out.println("No hi ha solució...");
@@ -17,7 +27,7 @@ public class Main {
             }
             System.out.println();
         }
-        esperar(100);
+        //esperar(100);
         System.out.println();
     }
     // Pausa l'execució per veure la bola movent-se
@@ -37,42 +47,41 @@ public class Main {
         return laberint[x][y] == 'X';
     }
 
-    public static boolean resolLaberint(int x, int y, char[][] laberint) {
+    public static boolean resolLaberint(int x, int y, char[][] laberint, ArrayList<String> visitats) {
         if (esValid(x, y, laberint)) {
             if (esFinal(x, y, laberint)) {
-                laberint[x][y] = 'X';
                 return true;
             }
-            laberint[x][y] = 'O';
+            String pos = x + "," + y;
+            if (visitats.contains(pos)) return false;
+            visitats.add(pos);
+            laberint[x][y] = 'O'; // Mark the cell as part of the path
             imprimirLaberint(laberint);
-            if (laberint[x][y] == 'X') {
+            if (resolLaberint(x + 1, y, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x + 1, y, laberint)) {
+            if (resolLaberint(x, y + 1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x, y + 1, laberint)) {
+            if (resolLaberint(x - 1, y, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x - 1, y, laberint)) {
+            if (resolLaberint(x, y - 1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x, y - 1, laberint)) {
+            if (resolLaberint(x + 1, y+1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x+1, y+1, laberint)) {
+            if (resolLaberint(x-1, y + 1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x-1, y-1, laberint)) {
+            if (resolLaberint(x - 1, y-1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x+1, y-1, laberint)) {
+            if (resolLaberint(x+1, y - 1, laberint, visitats)) {
                 return true;
             }
-            if (resolLaberint(x-1, y+1, laberint)) {
-                return true;
-            }
-            laberint[x][y] = ' ';
+            laberint[x][y] = ' '; // Unmark the cell if it is not part of the solution
             imprimirLaberint(laberint);
         }
         return false;
@@ -89,8 +98,20 @@ public class Main {
                 }
             }
         }
-        laberint[files - 1][columnes - 1] = 'X';
-        laberint[0][0] = ' ';
         return laberint;
+    }
+
+    public static int[] iniciFinalRandom(char[][] laberint) {
+        Random rand = new Random();
+        int iniciX, iniciY, finalX, finalY;
+        do {
+            iniciX = rand.nextInt(laberint.length);
+            iniciY = rand.nextInt(laberint[0].length);
+        } while (laberint[iniciX][iniciY] == '#');
+        do {
+            finalX = rand.nextInt(laberint.length);
+            finalY = rand.nextInt(laberint[0].length);
+        } while (laberint[finalX][finalY] == '#' || (finalX == iniciX && finalY == iniciY));
+        return new int[]{iniciX, iniciY, finalX, finalY};
     }
 }
