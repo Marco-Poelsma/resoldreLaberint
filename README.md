@@ -26,4 +26,4 @@ By modifying `Main.java: 5` you can modify the width and height of the maze. How
 
 ## Future improvements
 
-In the future, I would like to display all paths that reach `X`that are the shortest and of equal length (for example, if there's a loop in the maze and it takes the same to reach `X` via different routes).
+In the future, I would like to display all paths that reach `X` that are the shortest and of equal length (for example, if there's a loop in the maze and it takes the same to reach `X` via different routes).
