@@ -1,6 +1,6 @@
 # Java Maze Solver
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) 
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) 
 
 ## Objective and basic definition
 
@@ -12,6 +12,15 @@ This project solves a maze of sized `10 x 10` via **backtracking**. The maze is 
 - `O` marks the shortest found path between `I` and `X`.
 - `#` marks a wall.
 - Unexplored squares are left empty.
+
+### File Structure
+```
+.
+
+├── .idea
+
+└── Main.java
+```
 
 ## How does the algorythm work?
 
